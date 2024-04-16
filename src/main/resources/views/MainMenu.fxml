@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox maxHeight="-Infinity"
+      maxWidth="-Infinity"
+      minHeight="-Infinity"
+      minWidth="-Infinity"
+      xmlns="http://javafx.com/javafx/16"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.dudu.TomcatVuln.view.MainMenuView"
+      prefHeight="700.0" prefWidth="839.0">
+        <children>
+            <MenuBar>
+                <menus>
+                    <Menu mnemonicParsing="false"  text="字典设置">
+                        <items>
+                            <Menu fx:id="Dict"  mnemonicParsing="false"  onAction="#setDict" text="设置爆破字典" />
+                            <MenuItem fx:id="reset" mnemonicParsing="false" onAction="#setReset" text="重新加载配置" />
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false"  text="文件上传">
+                        <items>
+                            <Menu fx:id="shell" mnemonicParsing="false" onAction="#setJsp" text="webshell设置" />
+                            <Menu fx:id="war"   mnemonicParsing="false" onAction="#setWar" text="war设置" />
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+            <TabPane prefHeight="478.0" prefWidth="839.0" tabClosingPolicy="UNAVAILABLE">
+                <tabs>
+                    <Tab text="漏洞检测">
+                        <content>
+                            <VBox prefHeight="395.0" prefWidth="837.0">
+                                <children>
+                                    <HBox prefHeight="47.0" prefWidth="768.0" spacing="10.0">
+                                        <children>
+                                            <Text text="检测url" />
+                                            <TextField fx:id="url"  maxWidth="Infinity" prefHeight="27.0" prefWidth="400.0" HBox.hgrow="ALWAYS" />
+                                            <Text text="AJP协议端口" />
+                                            <TextField fx:id="port"  maxWidth="Infinity" prefHeight="27.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+                                            <ChoiceBox fx:id="choiceBox"  prefHeight="27.0" prefWidth="50.0">
+                                                <items>
+                                                    <FXCollections fx:factory="observableArrayList">
+                                                        <String fx:value="Put文件上传漏洞" />
+                                                        <String fx:value="弱口令漏洞" />
+                                                        <String fx:value="AJP协议漏洞" />
+                                                    </FXCollections>
+                                                </items>
+                                            </ChoiceBox>
+                                            <Button fx:id="requestUrl" maxWidth="-Infinity" mnemonicParsing="false" onAction="#CheckVuln" prefHeight="27.0" prefWidth="100.0" text="漏洞检测" HBox.hgrow="ALWAYS" />
+                                        </children>
+                                        <padding>
+                                            <Insets bottom="5.0" top="10.0"/>
+                                        </padding>
+                                    </HBox>
+                                    <TextArea fx:id="readmeArea" maxWidth="Infinity" prefHeight="151.0" prefWidth="768.0" VBox.vgrow="ALWAYS" />
+                                </children>
+                            </VBox>
+                        </content>
+                    </Tab>
+                    <Tab text="漏洞利用">
+                        <content>
+                            <VBox prefHeight="395.0" prefWidth="837.0">
+                                <children>
+                                    <HBox prefHeight="47.0" prefWidth="768.0" spacing="10.0">
+                                        <children>
+                                            <ChoiceBox fx:id="choiceBox1"  prefHeight="60.0" prefWidth="80.0">
+                                                <items>
+                                                    <FXCollections fx:factory="observableArrayList">
+                                                        <String fx:value="Put文件上传漏洞" />
+                                                        <String fx:value="弱口令漏洞" />
+                                                        <String fx:value="AJP协议漏洞" />
+                                                    </FXCollections>
+                                                </items>
+                                            </ChoiceBox>
+                                            <Button fx:id="UseVuln" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ExploitVuln" prefHeight="27.0" prefWidth="100.0" text="漏洞利用" HBox.hgrow="ALWAYS" />
+                                        </children>
+                                        <padding>
+                                            <Insets bottom="5.0" top="10.0"/>
+                                        </padding>
+                                    </HBox>
+                                    <TextArea fx:id="readmeArea1" maxWidth="Infinity" prefHeight="151.0" prefWidth="768.0" VBox.vgrow="ALWAYS" />
+                                </children>
+                            </VBox>
+                        </content>
+                    </Tab>
+                </tabs>
+                <padding>
+                    <Insets bottom="5.0" />
+                </padding>
+            </TabPane>
+            <TitledPane animated="false" collapsible="false" maxHeight="Infinity" prefHeight="500.0" prefWidth="992.0"
+                        text="日志输出" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="5.0" />
+                </padding>
+                <TextArea fx:id="logInfo" prefHeight="200.0" prefWidth="200.0"/>
+            </TitledPane>
+        </children>
+</VBox>

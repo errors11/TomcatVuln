@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FilePath>
+    <username>D:\javastart\TomcatVuln\src\main\resources\dict\username.txt</username>
+    <password>D:\javastart\TomcatVuln\src\main\resources\dict\password.txt</password>
+    <jsp>D:\javastart\TomcatVuln\src\main\resources\shell.jsp</jsp>
+    <war>D:\javastart\TomcatVuln\src\main\resources\shell.war</war>
+</FilePath>

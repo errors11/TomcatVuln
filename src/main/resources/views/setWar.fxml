@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="309.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dudu.TomcatVuln.view.SetWarView">
+   <children>
+      <AnchorPane layoutX="35.0" layoutY="13.0" prefHeight="284.0" prefWidth="460.0">
+         <children>
+            <Button fx:id="war" layoutX="420.0" layoutY="55.0" mnemonicParsing="false" onAction="#setWarPath" text="浏览" />
+            <TextField fx:id="warPath" layoutX="110.0" layoutY="54.0" prefHeight="26.0" prefWidth="300.0" />
+            <Text layoutX="5.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="war包路径" />
+            <Button fx:id="save" layoutX="97.0" layoutY="180.0" mnemonicParsing="false" onAction="#save" text="保存" />
+            <Button fx:id="reset" layoutX="329.0" layoutY="180.0" mnemonicParsing="false" onAction="#reset" text="重设" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
