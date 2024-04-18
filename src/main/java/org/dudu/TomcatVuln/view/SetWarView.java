@@ -10,6 +10,7 @@ import org.dom4j.DocumentException;
 import org.dudu.TomcatVuln.utils.FileUtil;
 import java.awt.*;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -54,6 +55,8 @@ public class SetWarView implements Initializable {
             String warPath = FileUtil.parseWar();
             this.warPath.setText(warPath);
         } catch (DocumentException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }

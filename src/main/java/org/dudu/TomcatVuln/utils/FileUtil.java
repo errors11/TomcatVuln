@@ -11,6 +11,9 @@ import org.dom4j.io.XMLWriter;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
+
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -28,22 +31,34 @@ public class FileUtil {
     public static String initShellPath;
 
     public static String initWarPath;
+    public static String getJarPath() throws UnsupportedEncodingException {
+        String jarPath = FileUtil.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        jarPath = URLDecoder.decode(jarPath, "UTF-8");
+        String jarDirectory = new File(jarPath).getParent();
+        return jarDirectory;
+    }
 
-    public static String[] parse() throws DocumentException {
-        Document document = reader.read(FileUtil.class.getResource("/config.xml"));
+    public static File getConfigFile() throws UnsupportedEncodingException {
+        String jarDirectory = getJarPath();
+        String configFilePath = jarDirectory + File.separator + "config.xml";
+        File configFile = new File(configFilePath);
+        return configFile;
+    }
+    public static String[] parse() throws DocumentException, UnsupportedEncodingException {
+        Document document = reader.read(getConfigFile());
         Element filePathElement = document.getRootElement();
         String username = filePathElement.elementText("username");
         String password = filePathElement.elementText("password");
         return new String[]{username,password};
     }
-    public static String parseJsp() throws DocumentException {
-        Document document = reader.read(FileUtil.class.getResource("/config.xml"));
+    public static String parseJsp() throws DocumentException, UnsupportedEncodingException {
+        Document document = reader.read(getConfigFile());
         Element filePathElement = document.getRootElement();
         String jsp = filePathElement.elementText("jsp");
         return jsp;
     }
-    public static String parseWar() throws DocumentException {
-        Document document = reader.read(FileUtil.class.getResource("/config.xml"));
+    public static String parseWar() throws DocumentException, UnsupportedEncodingException {
+        Document document = reader.read(getConfigFile());
         Element filePathElement = document.getRootElement();
         String jsp = filePathElement.elementText("war");
         return jsp;
@@ -60,13 +75,13 @@ public class FileUtil {
     }
 
     public static void writeConfig(String username,String password) throws DocumentException, IOException, URISyntaxException {
-        Document document = reader.read(FileUtil.class.getResource("/config.xml"));
+        Document document = reader.read(getConfigFile());
         Element rootElement = document.getRootElement();
         Element usernameElement = rootElement.element("username");
         usernameElement.setText(username);
         Element passwordElement = rootElement.element("password");
         passwordElement.setText(password);
-        FileWriter fileWriter = new FileWriter(FileUtil.class.getResource("/config.xml").getPath().substring(1));
+        FileWriter fileWriter = new FileWriter(getConfigFile());
         OutputFormat format = OutputFormat.createPrettyPrint();
         XMLWriter xmlWriter = new XMLWriter(fileWriter, format);
         xmlWriter.write(document);
@@ -74,11 +89,11 @@ public class FileUtil {
         xmlWriter.close();
     }
     public static void writeConfigJsp(String shellPath) throws DocumentException, IOException, URISyntaxException {
-        Document document = reader.read(FileUtil.class.getResource("/config.xml"));
+        Document document = reader.read(getConfigFile());
         Element rootElement = document.getRootElement();
         Element jspElement = rootElement.element("jsp");
         jspElement.setText(shellPath);
-        FileWriter fileWriter = new FileWriter(FileUtil.class.getResource("/config.xml").getPath().substring(1));
+        FileWriter fileWriter = new FileWriter(getConfigFile());
         OutputFormat format = OutputFormat.createPrettyPrint();
         XMLWriter xmlWriter = new XMLWriter(fileWriter, format);
         xmlWriter.write(document);
@@ -86,11 +101,11 @@ public class FileUtil {
         xmlWriter.close();
     }
     public static void writeConfigWar(String warPath) throws DocumentException, IOException, URISyntaxException {
-        Document document = reader.read(FileUtil.class.getResource("/config.xml"));
+        Document document = reader.read(getConfigFile());
         Element rootElement = document.getRootElement();
         Element jspElement = rootElement.element("war");
         jspElement.setText(warPath);
-        FileWriter fileWriter = new FileWriter(FileUtil.class.getResource("/config.xml").getPath().substring(1));
+        FileWriter fileWriter = new FileWriter(getConfigFile());
         OutputFormat format = OutputFormat.createPrettyPrint();
         XMLWriter xmlWriter = new XMLWriter(fileWriter, format);
         xmlWriter.write(document);

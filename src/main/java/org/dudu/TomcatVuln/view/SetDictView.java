@@ -11,6 +11,7 @@ import org.dom4j.DocumentException;
 import org.dudu.TomcatVuln.utils.FileUtil;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +30,8 @@ public class SetDictView implements Initializable{
             this.usernameFilePath.setText(filepath[0]);
             this.passwordFilePath.setText(filepath[1]);
         } catch (DocumentException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }

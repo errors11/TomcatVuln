@@ -221,10 +221,10 @@ public class MainMenuView implements Initializable {
         choiceBox.setValue("Put文件上传漏洞");
         choiceBox1.setValue("Put文件上传漏洞");
         try {
-            String UsernamePath = getClass().getResource("/dict/username.txt").getPath().substring(1);
-            String PasswordPath = getClass().getResource("/dict/password.txt").getPath().substring(1);
-            String ShellPath = getClass().getResource("/shell.jsp").getPath().substring(1);
-            String WarPath = getClass().getResource("/shell.war").getPath().substring(1);
+            String UsernamePath = FileUtil.getJarPath()+File.separator+"dict"+File.separator+"username.txt";
+            String PasswordPath = FileUtil.getJarPath()+File.separator+"dict"+File.separator+"password.txt";
+            String ShellPath = FileUtil.getJarPath()+File.separator+"shell.jsp";
+            String WarPath = FileUtil.getJarPath()+File.separator+"shell.war";
             FileUtil.initUsernamePath = UsernamePath;
             FileUtil.initPasswordPath = PasswordPath;
             FileUtil.initShellPath = ShellPath;
