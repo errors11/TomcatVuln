@@ -137,7 +137,7 @@ public class MainMenuView implements Initializable {
                     }
                     executeStrategy = StrategyChoose.chooseExploit("put");
                     String filepath = FileUtil.parseJsp();
-                    String filename = filepath.substring(filepath.lastIndexOf("/"));
+                    String filename = filepath.substring(filepath.lastIndexOf("\\")+1);
                     PutExpDTO putExpDTO = PutExpDTO.builder().url(url).filename(filename).filePath(filepath).build();
                     result = executeStrategy.execute(putExpDTO);
                     logInfo.appendText("===========Put上传漏洞检测:" + result + "=============" + "\n");
@@ -151,7 +151,8 @@ public class MainMenuView implements Initializable {
                     PasswordExpDTO passwordExpDTO = PasswordExpDTO.builder().base64_content(resultDTO.getAuth()).url(url).build();
                     //从配置中读取
                     String filepath_war = FileUtil.parseWar();
-                    String filename_war = filepath_war.substring(filepath_war.lastIndexOf("/"));
+                    String filename_war = filepath_war.substring(filepath_war.lastIndexOf("\\")+1);
+
                     passwordExpDTO.setFilename(filename_war);
                     passwordExpDTO.setFilePath(filepath_war);
                     result = executeStrategy.execute(passwordExpDTO);
